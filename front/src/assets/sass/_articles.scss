@@ -1,0 +1,98 @@
+.articlesContainer {
+    .container{
+        background: $color-background;
+        height: 80vh;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-areas:
+        "wash  wash    cough   travel"
+        "fever eat     cough   avoid"
+        "fever masonry masonry masonry";
+        grid-gap: 10px;
+        .item {
+            background: $color-item;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            &:hover {
+                background: $color-unique;
+
+            }
+        }
+        .item1 {
+            grid-area: wash;
+        }
+        .item2 {
+            grid-area: cough;
+        }
+        .item3{
+            grid-area: travel;
+        }
+        .item4{
+            grid-area: fever;
+        }
+        .item5{
+            /* background: var(--unique); */
+            grid-area: eat;
+        }
+        .item6{
+            grid-area: avoid;
+        }
+        .item7{
+            grid-area: masonry;
+        }
+        p{
+        color: white;
+        font-family: sans-serif;
+        font-size: 18px;
+        text-align: center;
+        }
+        
+        .title{
+        color: white;
+        font-family: sans-serif;
+        font-size: 90px;
+        text-align: center;
+        font-weight: bold;
+        display: block;
+        letter-spacing: -2px;
+        line-height: 80px;
+        }
+        .subtitle{
+        color: white;
+        width: 80%;
+        font-family: sans-serif;
+        font-size: 37px;
+        text-align: center;
+        letter-spacing: 2px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        }
+
+    }
+    
+    
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: none;
+    }
+    
+    .overlayContainer {
+        background-color: var(--item);
+        width: 80%;
+        height: 80%;
+    }
+}

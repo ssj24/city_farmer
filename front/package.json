@@ -1,0 +1,33 @@
+{
+  "name": "cityfarmer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "express-session": "^1.17.2",
+    "socket.io": "^4.3.2",
+    "vue": "^3.2.6",
+    "vue-router": "^4.0.3",
+    "vuex": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-router": "~5.0.0-beta.7",
+    "@vue/cli-plugin-typescript": "~5.0.0-beta.7",
+    "@vue/cli-plugin-vuex": "~5.0.0-beta.7",
+    "@vue/cli-service": "~5.0.0-beta.7",
+    "@vue/compiler-sfc": "^3.2.6",
+    "sass": "^1.32.7",
+    "sass-loader": "^12.0.0",
+    "typescript": "~4.1.5"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
