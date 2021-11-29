@@ -2,7 +2,7 @@
     <div class="searchContainer">
         <form>
             <select name="searchCategory" id="searchCategory">
-                <option v-for="cat in category" :key="cat.id" :value="cat.name" @click="selectCategory(cat.id)">{{ cat.name }}</option>
+                <option v-for="cat in category" :key="cat.sort" :value="cat.codeNm" @click="selectCategory(cat.sort)">{{ cat.codeNm }}</option>
             </select>
             <select name="searchKeyword" id="searchKeyword">
                 <option v-for="crop in crops[selectedCat]" :key="crops[crop]" :value="crop">{{ crop }}</option>
@@ -24,35 +24,56 @@ export default defineComponent({
   setup() {
       const selectedCat = 0;
       const category: object[] = [
-          {
-              id: 0,
-              name: '벼'
-          },
-          {
-              id: 1,
-              name: '밭농사'
-          },
-          {
-              id: 2,
-              name: '버섯'
-          },
-          {
-              id: 3,
-              name: '약초'
-          },
-          {
-              id: 4,
-              name: '채소'
-          },
-          {
-              id: 5,
-              name: '과수'
-          },
-          {
-              id: 6,
-              name: '화훼'
-          },
-      ];
+        {
+            codeNm: '벼',
+            kidofcomdtySeCode: '210004',
+            sort: '1'
+        },
+        {
+            codeNm: '밭농사',
+            kidofcomdtySeCode: '210005',
+            sort: '2'
+        },
+        {
+            codeNm: '버섯',
+            kidofcomdtySeCode: '210008',
+            sort: '3'
+        },
+        {
+            codeNm: '약초',
+            kidofcomdtySeCode: '210009',
+            sort: '4'
+        },
+        {
+            codeNm: '채소',
+            kidofcomdtySeCode: '210001',
+            sort: '5'
+        },
+        {
+            codeNm: '과수',
+            kidofcomdtySeCode: '210002',
+            sort: '6'
+        },
+        {
+            codeNm: '화훼',
+            kidofcomdtySeCode: '210003',
+            sort: '7'
+        },
+        {
+            codeNm: '축산',
+            kidofcomdtySeCode: '210007',
+            sort: '8'
+        },
+        {
+            codeNm: '사료작물',
+            kidofcomdtySeCode: '210010',
+            sort: '9'
+        },
+        {
+            codeNm: '잠업',
+            kidofcomdtySeCode: '210006',
+            sort: '10'
+        }];
       const crops: object[] = [
           [
               '기계이양재배',

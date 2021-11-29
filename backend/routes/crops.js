@@ -19,6 +19,7 @@ router.get('/', async function(req, res1, next) {
             if(res2.statusCode == 200){
                 let scheduleGrpList = converter.xml2js(body, {compact: true, spaces: 2});
                 let contents = scheduleGrpList.response.body.items.item;
+                console.log(contents);
                 res1.status(200).send(contents);
             }
         }
