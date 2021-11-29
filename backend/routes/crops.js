@@ -3,20 +3,26 @@ const express = require('express');
 const router = express.Router();
 require('dotenv').config();
 const axios = require('axios');
+const request = require('request');
+const converter = require('xml-js');
 
 
-router.get('/', function(req, res, next) {
-    let info;
+router.get('/', async function(req, res1, next) {
     const apiKey = process.env.VUE_APP_NONGSARO_KEY;
-    const groupListUrl = `http://api.nongsaro.go.kr/service/farmWorkingPlanNew/workScheduleGrpList?apiKey=${apiKey}`;
-    axios
-      .get(groupListUrl)
-      .then(response => console.log(response.data.list))
-      .catch(error => console.log(error))
-    const data = {
-        info
-    }
-    // res.status(200).send(data);
+    const requestUrl = `http://api.nongsaro.go.kr/service/farmWorkingPlanNew/workScheduleGrpList?apiKey=${apiKey}`;
+
+    request.get(requestUrl, (err,res2,body) =>{
+        if(err){
+            console.log(`err => ${err}`)
+        }
+        else {
+            if(res2.statusCode == 200){
+                let scheduleGrpList = converter.xml2js(body, {compact: true, spaces: 2});
+                let contents = scheduleGrpList.response.body.items.item;
+                res1.status(200).send(contents);
+            }
+        }
+    })
 });
 
 module.exports = router;
