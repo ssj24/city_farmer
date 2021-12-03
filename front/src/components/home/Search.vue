@@ -11,7 +11,7 @@
             <div class="container">
             <div class="title"></div>
             <div class="main">
-                <CropDetail />
+                <CropDetail :cntntsNo="cntntsNo" />
             </div>
             <div class="footer">
                 <button class="download">download</button>
@@ -871,36 +871,38 @@ export default defineComponent({
           ],
       ]
     let crops: object = cropsList[selectedCat];
-
+    let cntntsNo: String = '30697';
       return {
           selectedCat,
           category,
           cropsList,
-          crops
+          crops,
+          cntntsNo
       }
   },
   mounted() {
       
   },
-    methods: {
-        selectCategory(selected: number) {
-            console.log('selected', selected);
-        //   this.selectedCat = selected;
-        },
-        onChange(idx: number) {
-            this.crops = this.cropsList[idx];
-        },
-        openModal(evt: Event) {
+methods: {
+    selectCategory(selected: number) {
+        console.log('selected', selected);
+    //   this.selectedCat = selected;
+    },
+    onChange(idx: number) {
+        this.crops = this.cropsList[idx];
+    },
+    openModal(evt: Event) {
+        this.cntntsNo = (<HTMLSelectElement>document.querySelector("#searchKeyword")).value;
+        const modal = document.querySelector(".overlay") as HTMLDivElement;
+        modal.classList.add('active');
+        evt.stopPropagation();
+    },
+    closeModal(evt: Event){
+        if (evt.currentTarget != document.querySelector('.container')) {
             const modal = document.querySelector(".overlay") as HTMLDivElement;
-            modal.classList.add('active');
-            evt.stopPropagation();
-        },
-        closeModal(evt: Event){
-            if (evt.currentTarget != document.querySelector('.container')) {
-                const modal = document.querySelector(".overlay") as HTMLDivElement;
-                modal.classList.remove('active');
-            }
-        },
+            modal.classList.remove('active');
+        }
+    },
   }
 });
 </script>
