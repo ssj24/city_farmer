@@ -542,9 +542,11 @@
     #pszaCont .tbl-type01 p:first-child{ background: #2f74c3; width: 95%; margin: 25px auto -5px; line-height: 25px; color: #fff; text-align: center; text-indent: 0}
     
     /* 농작업일정_타이틀 */
-    #nongScheduleTit{ margin-top: 30px}
-    #nongScheduleTit h1{ font-size: 24px; margin-left: 10px; float: left}
-    #nongScheduleTit h2{ background: #dadada; font-size: 16px; color: #434343; font-weight: normal; line-height: 30px; text-align: center; margin-top: 10px}
+    #nongScheduleTit{ margin-top: 30px; width: 150%;}
+    #nongScheduleTit h1{ font-size: 60px; margin-left: 10px; float: left}
+    #nongScheduleTit h2{ background: #dadada; font-size: 50px; color: #434343; font-weight: normal; line-height: 30px; text-align: center; margin-top: 10px}
+    #nongScheduleTit h3{ padding-left: 15px; font-size: 40px; border-bottom: 3px solid $color-point-2; color: #333; letter-spacing: -1px; line-height: 1.4; margin: 30px 0 10px;}
+    #nongScheduleTit h6{ padding: 12px; font-size: 30px;}
     #nongScheduleTit h1 span{ display: inline-block; margin-left: 15px; font-size: 16px; color: #a3a3a3; font-weight: normal; padding-left: 10px}
     #nongScheduleTit .floatDiv .btn-2{ float: right}
     #nongScheduleTit table, #nongScheduleTit td{ table-layout: fixed}
@@ -571,7 +573,6 @@
     #nongScheduleTit .tblSchedule.tblSchedule3 thead td{ background: #ffb400; border: 1px solid #ffb400;}
     #nongScheduleTit .tblSchedule.tblSchedule3 thead td.bg2{ background: #ffca4c}
     #nongScheduleTit .tblSchedule.tblSchedule3 thead td.bg3{ background: #ffd97f}
-    #nongScheduleTit h3{ padding-left: 15px; font-size: 19px; color: #333; letter-spacing: -1px; line-height: 1.4; margin: 30px 0 10px;}
     #nongScheduleTit .bullet1{ margin: 0 0 5px 15px; padding-left: 12px; line-height: 1.4; font-size: 16px; color: #545454; word-break: keep-all}
     #nongScheduleTit .bullet3{ padding-left: 12px; line-height: 1.4; margin: 3px 0 0 0; font-size: 14px; color: #666;}
     #nongScheduleTit .txt_point{ font-size: 14px; color: #ff7800;}
@@ -581,7 +582,7 @@
     #nongScheduleTit .tblSection th{ background: #f5f5f5; font-weight: 600}
     
     /* 농작업일정 */
-    #nongSchedule{ margin-top: 30px}
+    #nongSchedule{ margin-top: 30px; width: 600%;}
     #nongSchedule h1{ font-size: 24px; margin-left: 10px; float: left}
     #nongSchedule h2{ background: #dadada; font-size: 16px; color: #434343; font-weight: normal; line-height: 30px; text-align: center; margin-top: 10px}
     #nongSchedule h1 span{ display: inline-block; margin-left: 15px; font-size: 16px; color: #a3a3a3; font-weight: normal; padding-left: 10px}
