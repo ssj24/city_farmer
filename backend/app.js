@@ -3,10 +3,29 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mysql = require('mysql');
+
+// Connection 객체 생성 
+var connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: '',
+  database: 'farmer'
+});
+// Connect
+connection.connect(function (err) {
+  if (err) {
+    console.error('mysql connection error');
+    console.error(err);
+    throw err;
+  } else console.log('mysql connected');
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var cropsRouter = require('./routes/crops');
+var journalsRouter = require('./routes/journals');
 
 var app = express();
 
@@ -23,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/crops', cropsRouter);
+app.use('/journals', journalsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

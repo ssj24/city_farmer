@@ -1,6 +1,6 @@
 .articlesContainer {
     .container{
-        background: $color-background;
+        // background: $color-primary;
         height: 80vh;
         padding: 20px;
         display: grid;
@@ -12,55 +12,73 @@
         "fever masonry masonry masonry";
         grid-gap: 10px;
         .item {
-            background: $color-item;
+            background: $color-dirt;
+            // border: 10px solid $color-dirt;
             padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             &:hover {
-                background: $color-unique;
-
+                background: $color-point-2;
+                cursor: pointer;
             }
         }
         .item1 {
             grid-area: wash;
+            &:hover {
+                background: $color-point-1;
+
+            }
         }
         .item2 {
             grid-area: cough;
+            &:hover {
+                background: $color-unique;
+
+            }
         }
         .item3{
             grid-area: travel;
+            &:hover {
+                background: $color-point-2;
+
+            }
         }
         .item4{
             grid-area: fever;
+            &:hover {
+                background: $color-point-2;
+
+            }
         }
         .item5{
             /* background: var(--unique); */
             grid-area: eat;
+            &:hover {
+                background: $color-point-2;
+
+            }
         }
         .item6{
             grid-area: avoid;
+            &:hover {
+                background: $color-point-1;
+
+            }
         }
         .item7{
             grid-area: masonry;
+            &:hover {
+                background: $color-unique;
+
+            }
         }
         p{
         color: white;
         font-family: sans-serif;
         font-size: 18px;
         text-align: center;
-        }
-        
-        .title{
-        color: white;
-        font-family: sans-serif;
-        font-size: 90px;
-        text-align: center;
-        font-weight: bold;
-        display: block;
-        letter-spacing: -2px;
-        line-height: 80px;
         }
         .subtitle{
         color: white;
@@ -76,23 +94,156 @@
 
     }
     
-    
-    .overlay {
+    .journalOverlay {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(255, 255, 255, 0.7);
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
         display: flex;
         justify-content: center;
         align-items: center;
-        display: none;
+        &.active {
+            display: none;
+        }
     }
     
     .overlayContainer {
-        background-color: var(--item);
+        background: $color-primary no-repeat center/100% 100% url('@/assets/note3.png');
+        box-shadow: inset 0 0 50px 20px rgba(0, 0, 0, 0.45);
         width: 80%;
         height: 80%;
+        font-family: 'HSSaemaul-Regular';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .overlayContents {
+            width: 80%;
+            height: 75%;
+            overflow: auto;
+            .journalHeader {
+                text-align: end;
+                .title{
+                    margin-top: 10px;
+                    color: darken($color-grey-dark-2, 30%);
+                    font-size: 60px;
+                    text-align: center;
+                    font-weight: bold;
+                    display: block;
+                    letter-spacing: 1px;
+                    line-height: 80px;
+                    }
+                .author {
+        
+                }
+                .date {
+        
+                }
+                .water {
+                    display: inline-block;
+                    font-size: 1.5rem;
+                    margin: 5px;
+                }
+                .fert {
+                    display: inline-block;
+                    font-size: 1.5rem;
+                    margin: 5px;
+                }
+            }
+
+            .content {
+                color: $color-grey-dark-1;
+            }
+        }
+        
+    }
+}
+
+.articleContainer {
+    font-family: 'HSSaemaul-Regular';
+    width: 100%;
+    height: 100%;
+    form {
+        width: 90%;
+        height: 90%;
+        margin: auto;
+        .header {
+            padding: 20px;
+            width: 100%;
+            height: 30%;
+            input[type=checkbox] {
+                display: none;
+                &:checked + .checked {
+                    display: none;
+
+                }
+                &:checked ~ .unchecked {
+                    display: block;
+                }
+                &:not(:checked) + .checked {
+                    display: block;
+                    
+                }
+                &:not(:checked) ~ .unchecked {
+                    border: 1px solid black;
+                    display: none;
+                }
+            }
+            .checked, .unchecked {
+                display: inline-block;
+                font-size: 1.5em;
+            }
+
+            .title {
+                border-bottom: 1px dotted black;
+                input {
+                    padding: 10px;
+                    font-size: 2em;
+                }
+            }
+            .water, .ferti {
+                width: 45%;
+                display: inline-block;
+                margin: 5px 20px;
+                label {
+                    position: relative;
+                    cursor: pointer;
+                    width: 100%;
+                    p {
+                        display: inline-block;
+                        position: relative;
+                        top: 5px;
+                        width: 40%;
+                    }
+                    .checked, .unchecked {
+                        position: absolute;
+                        top: 0;
+                        left: 100%;
+                        width: 150px;
+                    }
+                }
+            }
+        }
+        .footer {
+            width: 95%;
+            position: relative;
+            #submit {
+                font-family: 'HSSaemaul-Regular';
+                font-size: 1.1em;
+                padding: 10px 20px 15px 20px;
+                border: 1px solid black;
+                border-radius: 5px;
+                position: absolute;
+                right: 0;
+                top: 10px;
+            }
+            .pulse:hover, 
+            .pulse:focus {
+                animation: pulse 1s;
+                box-shadow: 0 0 0 1em rgba(#fff,0);
+                text-shadow: 0 0 10px $color-point-1;
+            }
+        }
     }
 }

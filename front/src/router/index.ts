@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
 import Profile from '../views/Profile.vue';
 import Login from '../views/Login.vue';
-import CropDetail from '../views/CropDetail.vue';
+import EditArticle from '../views/EditArticle.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,9 +13,6 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/profile',
     name: 'Profile',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: Profile
   },
   {
@@ -24,10 +21,10 @@ const routes: Array<RouteRecordRaw> = [
     component: Login
   },
   {
-    path: '/cropdetail',
-    name: 'CropDetail',
-    component: CropDetail
-  },
+    path: '/write',
+    name: 'Write',
+    component: EditArticle
+  }
 ]
 
 const router = createRouter({

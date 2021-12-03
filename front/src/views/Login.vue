@@ -22,38 +22,37 @@
     
     <div class="user_options-forms" id="user_options-forms">
       <div class="user_forms-login">
-        <h2 class="forms_title">Login</h2>
-        <form class="forms_form">
+        <h2 class="forms_title">로그인하기</h2>
+        <form class="forms_form" name="user" id="loginForm">
           <fieldset class="forms_fieldset">
             <div class="forms_field">
-              <input type="email" placeholder="Email" class="forms_field-input" required autofocus />
+              <input type="email" name="email" id="email" placeholder="Email" class="forms_field-input" required autofocus />
             </div>
             <div class="forms_field">
-              <input type="password" placeholder="Password" class="forms_field-input" required />
+              <input type="password" name="password" id="password" placeholder="Password" class="forms_field-input" required />
             </div>
           </fieldset>
           <div class="forms_buttons">
-            <button type="button" class="forms_buttons-forgot">Forgot password?</button>
-            <input type="submit" value="Log In" class="forms_buttons-action">
+            <input type="submit" @click="loginSubmit($event)" value="로그인" class="forms_buttons-action">
           </div>
         </form>
       </div>
       <div class="user_forms-signup">
-        <h2 class="forms_title">Sign Up</h2>
-        <form class="forms_form">
+        <h2 class="forms_title">도시농부 회원 되기</h2>
+        <form class="forms_form" name="user" id="signupForm">
           <fieldset class="forms_fieldset">
             <div class="forms_field">
-              <input type="text" placeholder="Full Name" class="forms_field-input" required />
+              <input type="text" name="name" id="newName" placeholder="Full Name" class="forms_field-input" required />
             </div>
             <div class="forms_field">
-              <input type="email" placeholder="Email" class="forms_field-input" required />
+              <input type="email" name="email" id="newEmail" placeholder="Email" class="forms_field-input" required />
             </div>
             <div class="forms_field">
-              <input type="password" placeholder="Password" class="forms_field-input" required />
+              <input type="password" name="password" id="newPassword" placeholder="Password" class="forms_field-input" required />
             </div>
           </fieldset>
           <div class="forms_buttons">
-            <input type="submit" value="Sign up" class="forms_buttons-action">
+            <input type="submit" @click="signupSubmit($event)" value="회원가입" class="forms_buttons-action">
           </div>
         </form>
       </div>
@@ -64,6 +63,11 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
+import axios from 'axios';
+import {
+	saveUserToCookie,
+	saveUserNameToCookie,
+} from '@/cookie';
 
 export default defineComponent({
   name: 'Login',
@@ -80,6 +84,8 @@ export default defineComponent({
       const signupButton = document.getElementById('signup-button')!;
       const loginButton = document.getElementById('login-button')!;
       const userForms = document.getElementById('user_options-forms')!;
+      const loginForm = document.getElementById('loginForm')!;
+      const signupForm = document.getElementById('signupForm')!;
   },
   methods: {
       
@@ -91,8 +97,49 @@ export default defineComponent({
       transLogin() {
         document.getElementById('user_options-forms')!.classList.remove('bounceLeft')
         document.getElementById('user_options-forms')!.classList.add('bounceRight')
+      },
+      loginSubmit(event: Event) {
+        event.preventDefault();
+        const user: object = {
+          email: (<HTMLInputElement>document.getElementById("email")).value,
+          password: (<HTMLInputElement>document.getElementById("password")).value
+        }
+        axios.post('/users/login', user)
+        .then(res => {
+          if (res.data.success) {
+            console.log(res.data);
+            let loginData = {
+                userId: res.data.userId,
+                userName: res.data.userName
+            }
+            this.$store.commit('startLogin', loginData)
+            this.$store.commit('isLogin')
+            saveUserToCookie(res.data.userId);
+            saveUserNameToCookie(res.data.userName);
+            this.$router.push('/');
+          } else {
+            alert('입력 정보가 틀렸습니다. \n 다시 확인해주세요.')
+          }
+        })
+        .catch(err=> console.log(err));
+      },
+      signupSubmit(event: Event) {
+        event.preventDefault();
+        const user: object = {
+          name: (<HTMLInputElement>document.getElementById("newName")).value,
+          email: (<HTMLInputElement>document.getElementById("newEmail")).value,
+          password: (<HTMLInputElement>document.getElementById("newPassword")).value
+        }
+        axios.post('/users/regist', user)
+        .then(res=> {
+          if (res.data.success) {
+            alert('도시농부에 오신 새로운 농부님을 환영합니다. \n로그인해주세요.')
+          } else {
+            alert('입력 정보가 틀렸습니다. \n다시 확인해주세요.')
+          }
+        })
+        .catch(err=> console.log(err));
       }
-        
     },
 
   }

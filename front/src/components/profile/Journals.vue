@@ -1,151 +1,71 @@
 <template>
   <div class="journalsContainer">
     <ul>
-        <li v-for="journal in journals" :key="journal.id" class="journal" @click="openJournal(journal.id)">
-            {{ journal.date }}
+        <li v-for="journal in journals" :key="journal.journalId" class="journal">
+            <p class="title">
+                {{ journal.title }}
+            </p>
+            <p class="date">
+                {{ journal.date }}
+            </p>
             <span v-if="journal.water">
                 💧
             </span>
             <span v-if="journal.fertilizer">
                 💊
             </span>
-            <p>
+            <p class="content">
                 {{ journal.content }}
             </p>
         </li>
     </ul>
-    <JournalContainer id="journalContainer" class="journalContainer"  @click="closeJournal"/>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import JournalContainer from '@/components/profile/JournalDetail.vue'
+import axios from 'axios';
 
 export default defineComponent({
   name: 'Journals',
   components: {
-      JournalContainer
   },
   props: {
     // crops: Object,
   },
-  methods: {
-      openJournal(id: number) {
-          const journalContainer = document.getElementById('journalContainer')!;
-          journalContainer.classList.toggle('seek');
-      },
-      closeJournal() {
-          const journalContainer = document.getElementById('journalContainer')!;
-          journalContainer.classList.toggle('seek');
-      }
-  },
-  setup() {
-
-      const dateExam: String = new Date().toLocaleDateString();
-      let journals: object[]= [
-      ]
-      journals = [
+  data() {
+      let journals: object[] = [
           {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'text',
-              water: true,
-              fertilizer: false,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'text',
+              journalId: 3,
+              title: '제목입니다',
+              date: '2021-12-03',
               water: false,
-              fertilizer: false,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'texttext',
-              water: true,
-              fertilizer: false,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'texttexttexttexttexttexttext texttexttexttexttexttextt exttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttext texttexttexttexttexttexttexttexttexttexttexttexttexttextt exttexttexttexttexttexttexttexttexttexttexttext texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttextte ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttex texttexttexttexttexttexttexttexttexttexttexttexttexttexttextt exttexttexttexttexttext texttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttext texttexttexttexttexttexttexttexttexttexttexttext texttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttextt exttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextt exttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext texttexttexttexttexttexttexttexttexttexttexttexttexttexttextt exttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextt exttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext texttexttexttexttexttexttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextt exttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextt exttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextt exttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextt exttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex ttexttexttexttexttexttexttext123345435262647987123098471238946',
-              water: true,
               fertilizer: true,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'texttexttexttext',
-              water: true,
-              fertilizer: false,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'texttexttexttext',
-              water: true,
-              fertilizer: false,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'texttexttexttext',
-              water: true,
-              fertilizer: false,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'texttexttexttext',
-              water: true,
-              fertilizer: false,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'texttexttexttext',
-              water: true,
-              fertilizer: false,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'texttexttexttext',
-              water: true,
-              fertilizer: false,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'texttexttexttext',
-              water: true,
-              fertilizer: false,
-          },
-          {
-              id: 1,
-              date: dateExam,
-              img: 'img path',
-              content: 'texttexttexttext',
-              water: true,
-              fertilizer: false,
-          },
+              content: '집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지 집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지 집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지 집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지 집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지 집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지 집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지 집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지 집 근처 주말농장은 자리따기가 너무 힘들어서 작년부터 좀 거리가 있는 주말농장을 다니고 있는데 차가 없으면 안 가게 되서 아무래도 너무 불편하다 가까이 있어야 한 번이라도 더 가서 볼 텐데 내년부터는 집 근처 주말농장에 다시 가봐야지'
+          }
       ];
       return {
           journals
       }
+  },
+  methods: {
+    //   openJournal(id: number) {
+    //       const journalContainer = document.getElementById('journalContainer')!;
+    //       journalContainer.classList.toggle('seek');
+    //   },
+    //   closeJournal() {
+    //       const journalContainer = document.getElementById('journalContainer')!;
+    //       journalContainer.classList.toggle('seek');
+    //   }
+  },
+  mounted() {
+
+    axios.
+    get('/journals/user')
+    .then(res => {
+        this.journals = res.data.data;
+    })
+    .catch(err => console.log(err));
   }
 });
 </script>

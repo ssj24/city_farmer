@@ -2,30 +2,31 @@
   <div class="profile">
     <div class="profileContainer">
       <p class="userName">
-        {{ user.name }}
+        <span v-for="alpha in user.name" :key="alpha">{{alpha}} &nbsp;</span>
       </p>
       <div class="profileRight">
         <p class="recentWork">
-          🌊 {{ user.water }} &nbsp; 💊 {{ user.med }}
+          💧 {{ user.water }} &nbsp; 🧪 {{ user.med }}
         </p>
       </div>
     </div>
     <CropTab :crops="crops"/>
-    <Journals />
     <div class="main">
-      <div class="journals">
-        <div class="journalContainer">
-          
+      <div class="notisContainer">
+        <div class="notis">
+          <p v-for="noti in notis" :key="noti.id" :class="noti.category == 1 ? 'warning' : 'news'">{{noti.content}}</p>
         </div>
       </div>
+      <Journals />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import CropTab from '@/components/profile/CropTab.vue'
-import Journals from '@/components/profile/Journals.vue'
+import CropTab from '@/components/profile/CropTab.vue';
+import Journals from '@/components/profile/Journals.vue';
+import {getCookie} from '@/cookie';
 
 export default defineComponent({
   name: 'Profile',
@@ -33,18 +34,65 @@ export default defineComponent({
     CropTab,
     Journals
   },
-  setup() {
-      let user: object;
-      let crops: object[];
-
-      user = {
+  data() {
+    let user: object = {};
+    let crops: object[] = [];
+    let notis = [
+      {
         id: 1,
-        name: '홍길동',
-        crops: [1, 2, 3, 4, 5],
-        water: '2021-11-15',
-        med: '2021-11-02'
-      };
-      crops = [
+        category: 1,
+        content: 'warningwarning'
+
+      },
+      {
+        id: 2,
+        category: 1,
+        content: 'warningwarning'
+
+      },
+      {
+        id: 3,
+        category: 2,
+        content: 'warningwarning'
+
+      },
+      {
+        id: 4,
+        category: 1,
+        content: 'warningwarning'
+
+      },
+      {
+        id: 5,
+        category: 2,
+        content: 'warningwarning'
+
+      },
+      {
+        id: 6,
+        category: 1,
+        content: 'warningwarning'
+
+      }
+    ];
+    return {
+      user,
+      crops,
+      notis
+    }
+  },
+  setup() {
+  },
+  mounted() {
+    this.user = {
+      id: getCookie('userId'),
+      name: getCookie('userName'),
+      crops: [1, 2, 3, 4, 5],
+      water: '2021-11-15',
+      med: '2021-11-02'
+    },
+
+    this.crops = [
           {
               id: 1,
               name: '콩',
@@ -71,10 +119,6 @@ export default defineComponent({
               img: require('@/assets/flower.png'),
           },
       ];
-      return {
-          user,
-          crops
-      }
   }
 });
 </script>

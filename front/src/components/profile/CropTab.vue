@@ -1,18 +1,26 @@
 <template>
   <div class="cropTabsContainer">
-    <ul class="cropTabs">
-      <li class="cropTab" v-for="crop in crops" :key="crop.id" @mouseenter="toggleActive($event, crop.id)" @click="openModal($event, crop.id)">
-        <p>{{crop.name}}</p>
-      </li>
-
-    </ul>
-  <div class="notis">
-    <p v-for="noti in notis" :key="noti.id" :class="noti.category == 1 ? 'warning' : 'news'">{{noti.content}}</p>
-  </div>
+    <div class="crops">
+      <ul>
+          <li v-for="crop in crops" :key="crop.id" 
+              v-bind:style="{ 'background-image': 'url(' + crop.img + ')' }"
+              @mouseenter="toggleActive($event, crop.id)" 
+              @mouseleave="toggleActive($event, crop.id)"
+              @click="openModal($event, crop.id)"
+              class="crop pulse">
+              <p>{{ crop.name }}</p>
+              <!-- <img :src="crop.img" alt="" width="100" height="100"> -->
+          </li>
+      </ul>
+    
+    </div>
+  
   <div class="overlay" @click.self="closeModal($event)">
     <div class="container">
       <div class="title"></div>
-      <div class="main"></div>
+      <div class="main">
+        <CropDetail />
+      </div>
       <div class="footer">
         <button class="download">download</button>
         <button class="close" @click="closeModal($event)">close</button>
@@ -24,9 +32,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import CropDetail from '../CropDetail.vue';
 
 export default defineComponent({
   name: 'CropTab',
+  components: {
+    CropDetail
+  },
   props: {
     crops: {
       type: Array
@@ -43,44 +55,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.notis = [
-      {
-        id: 1,
-        category: 1,
-        content: 'warningwarning'
-
-      },
-      {
-        id: 2,
-        category: 1,
-        content: 'warningwarning'
-
-      },
-      {
-        id: 3,
-        category: 2,
-        content: 'warningwarning'
-
-      },
-      {
-        id: 4,
-        category: 1,
-        content: 'warningwarning'
-
-      },
-      {
-        id: 5,
-        category: 2,
-        content: 'warningwarning'
-
-      },
-      {
-        id: 6,
-        category: 1,
-        content: 'warningwarning'
-
-      }
-    ]
+    
   },
   methods: {
     openModal(evt: Event, idx: number) {
@@ -95,7 +70,7 @@ export default defineComponent({
       }
     },
     toggleActive(event: Event, idx: number) {
-      const tabLis = Array.from(document.querySelectorAll(".cropTab"));
+      const tabLis = Array.from(document.querySelectorAll(".crop"));
       for (const tabLi of tabLis) {
         tabLi.classList.remove('active');
       }
