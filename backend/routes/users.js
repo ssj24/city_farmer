@@ -25,6 +25,32 @@ connection.connect(function (err) {
 router.get('/', function(req, res, next) {
   res.send('respond with a user resource');
 });
+router.get('/crops', function(req, res, next) {
+  const Id = req.cookies.userId;
+  connection.query(`select * from crops where cropId in (select cropId from likeCrops where likeCrops.userId = ${Id});`, function(err, row) {
+    console.log(row.length);
+    if (err) {
+      console.log(err);
+      // res.json({ // 매칭되는 아이디 없을 경우
+      //   success: false,
+      //   message: '서버에서 에러가 발생했습니다.'
+      // })
+    } else {
+      console.log('entered else');
+      if (row.length) {
+        res.json({
+          success: true,
+          data: row
+        })
+      } else {
+      res.json({
+        success: true,
+        data: []
+      })
+    }
+    }
+  })
+});
 
 router.post('/regist', function(req, res) {
   var user = {
@@ -68,7 +94,6 @@ router.post('/login', function (req, res) {
     if (row[0] !== undefined && row[0].email === user.email) {
       bcrypt.compare(user.password, row[0].password, function (err, res2) {
         if (res2) {
-          console.log(row[0]);
           res.json({ // 로그인 성공
             success: true,
             message: 'Login successful!',

@@ -27,6 +27,7 @@ import { defineComponent } from 'vue';
 import CropTab from '@/components/profile/CropTab.vue';
 import Journals from '@/components/profile/Journals.vue';
 import {getCookie} from '@/cookie';
+import axios from 'axios';
 
 export default defineComponent({
   name: 'Profile',
@@ -36,7 +37,33 @@ export default defineComponent({
   },
   data() {
     let user: object = {};
-    let crops: object[] = [];
+    let crops: object[] = [
+      {
+          cropId: 1,
+          codeNm: '콩',
+          img: '@/assets/flower.png',
+      },
+      {
+          cropId: 2,
+          codeNm: '옥수수',
+          img: require('@/assets/flower.png'),
+      },
+      {
+          cropId: 3,
+          codeNm: '감자',
+          img: require('@/assets/flower.png'),
+      },
+      {
+          cropId: 4,
+          codeNm: '벼',
+          img: require('@/assets/flower.png'),
+      },
+      {
+          cropId: 5,
+          codeNm: '수수',
+          img: require('@/assets/flower.png'),
+      },
+    ];
     let notis = [
       {
         id: 1,
@@ -83,42 +110,22 @@ export default defineComponent({
   },
   setup() {
   },
+
   mounted() {
+    axios.
+    get('/users/crops')
+    .then(res => {
+      console.log('users/crops', res);
+      this.crops = res.data.data;
+    })
+    .catch(err => console.log(err));
+
     this.user = {
       id: getCookie('userId'),
       name: getCookie('userName'),
-      crops: [1, 2, 3, 4, 5],
       water: '2021-11-15',
       med: '2021-11-02'
-    },
-
-    this.crops = [
-          {
-              id: 1,
-              name: '콩',
-              img: require('@/assets/flower.png'),
-          },
-          {
-              id: 2,
-              name: '옥수수',
-              img: require('@/assets/flower.png'),
-          },
-          {
-              id: 3,
-              name: '감자',
-              img: require('@/assets/flower.png'),
-          },
-          {
-              id: 4,
-              name: '벼',
-              img: require('@/assets/flower.png'),
-          },
-          {
-              id: 5,
-              name: '수수',
-              img: require('@/assets/flower.png'),
-          },
-      ];
+    }
   }
 });
 </script>

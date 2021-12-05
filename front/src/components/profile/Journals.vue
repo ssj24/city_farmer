@@ -6,7 +6,7 @@
                 {{ journal.title }}
             </p>
             <p class="date">
-                {{ journal.date }}
+                {{ journal.created_at }}
             </p>
             <span v-if="journal.water">
                 💧
@@ -63,6 +63,7 @@ export default defineComponent({
     axios.
     get('/journals/user')
     .then(res => {
+      console.log('journals/user', res);
         this.journals = res.data.data;
     })
     .catch(err => console.log(err));

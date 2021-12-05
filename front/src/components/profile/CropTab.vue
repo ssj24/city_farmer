@@ -2,14 +2,14 @@
   <div class="cropTabsContainer">
     <div class="crops">
       <ul>
-          <li v-for="crop in crops" :key="crop.id" 
-              v-bind:style="{ 'background-image': 'url(' + crop.img + ')' }"
-              @mouseenter="toggleActive($event, crop.id)" 
-              @mouseleave="toggleActive($event, crop.id)"
-              @click="openModal($event, crop.id)"
+          <li v-for="crop in crops" :key="crop.cropId" 
+              v-bind:style="{ 'background-image': 'url(' + crop.image + ')' }"
+              @mouseenter="toggleActive($event, crop.cropId)" 
+              @mouseleave="toggleActive($event, crop.cropId)"
+              @click="openModal($event, crop.cntntsNo)"
               class="crop pulse">
-              <p>{{ crop.name }}</p>
-              <!-- <img :src="crop.img" alt="" width="100" height="100"> -->
+              <p>{{ crop.codeNm }}</p>
+              <!-- <img :src="crop.image" alt="" width="100" height="100"> -->
           </li>
       </ul>
     
@@ -19,7 +19,7 @@
     <div class="container">
       <div class="title"></div>
       <div class="main">
-        <CropDetail />
+        <CropDetail :cntntsNo="cntntsNo"/>
       </div>
       <div class="footer">
         <button class="download">download</button>
@@ -47,6 +47,7 @@ export default defineComponent({
   data() {
     return {
       notis: new Array,
+      cntntsNo: 30697
     }
   },
   setup() {
@@ -55,11 +56,15 @@ export default defineComponent({
     }
   },
   mounted() {
-    
+    // if (this.crops[0]) {
+    //   // this.cntntsNo = this.crops.cntntsNo;
+    //   console.log(this.crops[0]);
   },
   methods: {
-    openModal(evt: Event, idx: number) {
+    openModal(evt: Event, id: number) {
       const modal = document.querySelector(".overlay") as HTMLDivElement;
+      this.cntntsNo = id;
+      console.log(this.cntntsNo);
       modal.classList.add('active');
       evt.stopPropagation();
     },
@@ -69,7 +74,7 @@ export default defineComponent({
         modal.classList.remove('active');
       }
     },
-    toggleActive(event: Event, idx: number) {
+    toggleActive(event: Event, id: number) {
       const tabLis = Array.from(document.querySelectorAll(".crop"));
       for (const tabLi of tabLis) {
         tabLi.classList.remove('active');

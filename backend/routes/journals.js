@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
                 data: row
         })} else {
             res.json({
-                success: success,
+                success: false,
                 message: '글이 없습니다!'
         })}
     })
@@ -55,8 +55,9 @@ router.get('/user', function(req, res, next) {
                 data: row
         })} else {
             res.json({
-                success: success,
-                message: '글이 없습니다!'
+                success: false,
+                message: '글이 없습니다!',
+                data: []
         })}
     })
 })
