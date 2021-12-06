@@ -6,15 +6,16 @@
       </p>
       <div class="profileRight">
         <p class="recentWork">
-          💧 {{ user.water }} &nbsp; 🧪 {{ user.med }}
+          💧 {{ water }} &nbsp; 🧪 {{ med }}
         </p>
       </div>
     </div>
     <CropTab :crops="crops"/>
     <div class="main">
       <div class="notisContainer">
+        <p class="notiTitle">12월의 병해충</p>
         <div class="notis">
-          <p v-for="noti in notis" :key="noti.id" :class="noti.category == 1 ? 'warning' : 'news'">{{noti.content}}</p>
+          <p v-for="noti in notis" :key="noti.diseasesId" :class="getClass(noti.midCategory)">{{noti.category}}-{{noti.midCategory}}: {{noti.name}}</p>
         </div>
       </div>
       <Journals />
@@ -66,46 +67,36 @@ export default defineComponent({
     ];
     let notis = [
       {
-        id: 1,
-        category: 1,
-        content: 'warningwarning'
-
+        diseasesId: 1,
+        year: 2021,
+        month: 12,
+        category: '시설채소',
+        midCategory: '병',
+        name: '잿빛곰팡이병'
       },
       {
-        id: 2,
-        category: 1,
-        content: 'warningwarning'
-
+        diseasesId: 2,
+        year: 2021,
+        month: 12,
+        category: '시설채소',
+        midCategory: '바이러스',
+        name: '토마토반점위조바이러스'
       },
       {
-        id: 3,
-        category: 2,
-        content: 'warningwarning'
-
-      },
-      {
-        id: 4,
-        category: 1,
-        content: 'warningwarning'
-
-      },
-      {
-        id: 5,
-        category: 2,
-        content: 'warningwarning'
-
-      },
-      {
-        id: 6,
-        category: 1,
-        content: 'warningwarning'
-
+        diseasesId: 2,
+        year: 2021,
+        month: 12,
+        category: '시설채소',
+        midCategory: '해충',
+        name: '총채벌레류'
       }
     ];
     return {
       user,
       crops,
-      notis
+      notis,
+      water: '0000-00-00',
+      med: '0000-00-00'
     }
   },
   setup() {
@@ -115,16 +106,34 @@ export default defineComponent({
     axios.
     get('/users/crops')
     .then(res => {
-      console.log('users/crops', res);
       this.crops = res.data.data;
+    })
+    .catch(err => console.log(err));
+
+    axios.
+    get('/crops/diseases')
+    .then(res => {
+      this.notis = res.data.data;
     })
     .catch(err => console.log(err));
 
     this.user = {
       id: getCookie('userId'),
-      name: getCookie('userName'),
-      water: '2021-11-15',
-      med: '2021-11-02'
+      name: getCookie('userName')
+    }
+    axios.
+    get('/users')
+    .then(res => {
+      this.water = res.data.fertilizer[0].created_at;
+      this.med = res.data.water[0].created_at;
+    })
+    .catch(err => console.log(err))
+  },
+  methods: {
+    getClass(midCategory: string) {
+      if (midCategory === '병') return 'warning';
+      else if (midCategory === '바이러스') return 'virus';
+      else return 'bug';
     }
   }
 });

@@ -5,7 +5,24 @@ require('dotenv').config();
 const axios = require('axios');
 const request = require('request');
 const converter = require('xml-js');
-
+//추가한 부분
+var mysql = require('mysql');
+// Connection 객체 생성 
+var connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,
+  user: 'root',   
+  password: '',
+  database: 'farmer'  
+});  
+// Connect
+connection.connect(function (err) {
+  if (err) {
+    console.error('mysql connection error');
+    console.error(err);
+    throw err;
+  } 
+});
 
 router.get('/', async function(req, res1, next) {
     const cntntsNo = req.query.cntnts;
@@ -44,5 +61,23 @@ router.get('/', async function(req, res1, next) {
     })
 
 });
-
+router.get('/diseases', function(req, res, next) {
+    connection.query('SELECT * FROM diseases', function (err, row) {
+        if (err) {
+          res.json({
+            success: false,
+            message: '서버에서 에러가 발생했습니다'
+          })
+        }
+        if (row.length) {
+            res.json({
+                success: true,
+                data: row
+        })} else {
+            res.json({
+                success: false,
+                message: '검색된 병해충이 없습니다!'
+        })}
+    })
+});
 module.exports = router;

@@ -14,7 +14,6 @@
                 <CropDetail :cntntsNo="cntntsNo" />
             </div>
             <div class="footer">
-                <button class="download">download</button>
                 <button class="close" @click="closeModal($event)">close</button>
             </div>
             </div>

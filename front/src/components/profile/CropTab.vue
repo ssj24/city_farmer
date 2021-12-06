@@ -17,12 +17,10 @@
   
   <div class="overlay" @click.self="closeModal($event)">
     <div class="container">
-      <div class="title"></div>
       <div class="main">
         <CropDetail :cntntsNo="cntntsNo"/>
       </div>
       <div class="footer">
-        <button class="download">download</button>
         <button class="close" @click="closeModal($event)">close</button>
       </div>
     </div>

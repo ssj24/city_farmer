@@ -83,15 +83,20 @@
 
     
   }
-  .main {
+  &> .main {
     width: 85%;
     height: 100%;
     margin: 0 auto;
     @include flexRow;
     align-items: baseline;
     .notisContainer {
+      margin-top: 50px;
       width: 30%;
       height: 100%;
+      .notiTitle {
+        font-size: 1.5em;
+        text-align: center;
+      }
       .notis {
         margin: 10px auto;
         border: 2px solid transparent;
@@ -105,17 +110,25 @@
           &.warning {
             @include alertDiv(rgb(220, 17, 1));
             &::before {
-              content: '★';
+              content: '🏥';
               color: rgba(220, 17, 1, 0.95);
               margin-right: 5px;
             }
             
           }
-          &.news {
-            @include alertDiv(rgb(241, 142, 1));
+          &.virus {
+            @include alertDiv(rgb(159, 42, 192));
             &::before {
-              content: '※';
-              color: rgba(241, 142, 6, 0.99);
+              content: '😈';
+              color: rgba(159, 42, 192, 0.99);
+              margin-right: 5px;
+            }
+          }
+          &.bug {
+            @include alertDiv(rgb(62, 104, 9));
+            &::before {
+              content: '🐛';
+              color: rgba(61, 104, 9, 0.836);
               margin-right: 5px;
             }
           }
@@ -123,6 +136,7 @@
       }
     }
     .journalsContainer {
+      margin-top: 50px;
       width: 69%;
       ul {
         height: 100%;

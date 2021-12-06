@@ -22,7 +22,7 @@ connection.connect(function (err) {
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    connection.query('SELECT journalId, title, date_format(created_at, "%Y-%m-%d") as created_at, water, fertilizer, content, userId, name FROM journals, users WHERE journals.author = users.userId LIMIT 0, 7', function (err, row) {
+    connection.query('SELECT journalId, title, date_format(created_at, "%Y-%m-%d") as created_at, water, fertilizer, content, userId, name FROM journals, users WHERE journals.author = users.userId ORDER BY journalId DESC LIMIT 0, 7', function (err, row) {
         if (err) {
           res.json({
             success: false,
@@ -42,7 +42,7 @@ router.get('/', function(req, res, next) {
 });
 router.get('/user', function(req, res, next) {
     const Id = req.cookies.userId;
-    connection.query('SELECT * FROM journals WHERE author = '+Id+';', function (err, row) {
+    connection.query('SELECT journalId, title, date_format(created_at, "%Y-%m-%d") as created_at, water, fertilizer, content FROM journals WHERE author = '+Id+';', function (err, row) {
         if (err) {
           res.json({
             success: false,

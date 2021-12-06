@@ -23,20 +23,48 @@ connection.connect(function (err) {
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a user resource');
+  const Id = req.cookies.userId;
+  let water = '';
+  let fertilizer = '';
+  connection.query(`select date_format(created_at, "%Y-%m-%d") as created_at from journals where author = ${Id} and water = 1 order by created_at asc limit 0, 1;`, function(err, row) {
+    if (err) {
+      console.log(err);
+    } else if (row.length) {
+      water = row;
+    } else if (!row.length) {
+      water = '';
+    }
+    connection.query(`select date_format(created_at, "%Y-%m-%d") as created_at from journals where author = ${Id} and fertilizer = 1 order by created_at asc limit 0, 1;`, function(err2, row2) {
+      if (err2) {
+        console.log(err2);
+      } else if (row2.length) {
+        fertilizer = row2;
+        res.json({
+          success: true,
+          water: water,
+          fertilizer: fertilizer
+        })
+      } else if (!row.length) {
+        res.json({
+          success: true,
+          water: water,
+          fertilizer: fertilizer
+        })
+      }
+    })
+
+  })
+  
 });
 router.get('/crops', function(req, res, next) {
   const Id = req.cookies.userId;
   connection.query(`select * from crops where cropId in (select cropId from likeCrops where likeCrops.userId = ${Id});`, function(err, row) {
-    console.log(row.length);
     if (err) {
-      console.log(err);
-      // res.json({ // 매칭되는 아이디 없을 경우
-      //   success: false,
-      //   message: '서버에서 에러가 발생했습니다.'
-      // })
+      res.json({ // 매칭되는 아이디 없을 경우
+        success: false,
+        message: '서버에서 에러가 발생했습니다.'
+      })
     } else {
-      console.log('entered else');
       if (row.length) {
         res.json({
           success: true,

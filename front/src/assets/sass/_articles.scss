@@ -1,7 +1,7 @@
 .articlesContainer {
     .container{
         // background: $color-primary;
-        height: 80vh;
+        height: 70vh;
         padding: 20px;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -83,7 +83,6 @@
         .subtitle{
         color: white;
         width: 80%;
-        font-family: sans-serif;
         font-size: 37px;
         text-align: center;
         letter-spacing: 2px;
@@ -153,7 +152,9 @@
             }
 
             .content {
+                background-color: rgba($color-primary, 0.7);
                 color: $color-grey-dark-1;
+                text-align: center;
             }
         }
         
@@ -183,7 +184,6 @@
                 }
                 &:not(:checked) + .checked {
                     display: block;
-                    
                 }
                 &:not(:checked) ~ .unchecked {
                     border: 1px solid black;

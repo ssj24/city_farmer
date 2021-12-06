@@ -44,30 +44,4 @@
     
 }
 
-.main {
-    // @include basicDiv;
-    .leftSec {
-        @include halfDiv;
-        width: 30%;
-        ul {
-            height: 100%;
-            margin: 10px;
-            @include flexColumn;
-            justify-content: first baseline;
-            align-items: baseline;
-            .noti {
-                font-size: large;
-                &.noti_water {
-                    @include alertDiv($color-alert-2);
-                }
-                &.noti_bug {
-                    @include alertDiv($color-alert);
-                    color: #fff;
-                }
-            }
-        }
-    }
-    
-
-}
 

@@ -30,10 +30,12 @@
                 </label>
             </div>
         </div>
-        <div id="editor">
-        </div>
-        <div class="editor">
-            <Editor />
+        <div class="main">
+            <div id="editor">
+            </div>
+            <div class="editor">
+                <Editor />
+            </div>
         </div>
         <div class="footer">
             <button id="submit" class="pulse">글쓰기</button>
@@ -61,7 +63,7 @@ export default defineComponent({
       initialEditType: "markdown",
       initialValue: '여기에 일기를 작성해주세요 🌿',
       previewStyle: "vertical",
-      height: "400px",
+      height: "500px",
     })
     const btn = document.querySelector("#submit")!
     btn.addEventListener('click', (event) => {

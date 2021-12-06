@@ -2,8 +2,8 @@
 <div class="articlesContainer">
     <div class="container articles">
         <div @click="toggleActive($event, idx)" class="item" :class="'item'+(idx + 1)" v-for="(journal, idx) in journals" :key="journal.journalId">
+            <p>{{journal.name}}</p>
             <span class="subtitle">{{journal.title}}</span>
-            <p>{{journal.author}}</p>
             <p>{{journal.created_at}}</p>
         </div>
     </div>
@@ -13,7 +13,7 @@
           <div class="overlayContents">
             <div class="journalHeader">
               <span class="title">{{journalDetail.title}}</span>
-              <p class="author">{{journalDetail.author}}</p>
+              <p class="author">{{journalDetail.name}}</p>
               <p class="date">{{journalDetail.created_at}}</p>
               <p class="water" v-if="journalDetail.water">💧</p>
               <p class="fert" v-if="journalDetail.fertilizer">🧪</p>
@@ -46,11 +46,12 @@ export default defineComponent({
     this.journals = [
         {
             journalId: 0,
+            name: 'fff',
             title: 'journal_title',
             author: 0,
             created_at: new Date().toISOString().split('T')[0],
             water: true,
-            fertilizer: false,
+            fertilizer: true,
             content: `What's Biden's new Covid plan?
 Under the details unveiled on Thursday, all international passengers will have to be tested for the virus in the 24 hours before they leave for the US, regardless of their vaccination status. Mask requirements on planes, trains and buses will be extended until March.
 
@@ -110,8 +111,9 @@ The Hawaii case was experiencing mild to moderate symptoms and was isolated at h
         {
             journalId: 1,
             title: 'journal_title',
+            name: 'fff',
             author: 0,
-            created_at: new Date(),
+            created_at: new Date().toISOString().split('T')[0],
             water: true,
             fertilizer: true,
             content: 'journal_content1'
@@ -120,8 +122,9 @@ The Hawaii case was experiencing mild to moderate symptoms and was isolated at h
         {
             journalId: 2,
             title: 'journal_title',
+            name: 'fff',
             author: 0,
-            created_at: new Date(),
+            created_at: new Date().toISOString().split('T')[0],
             water: false,
             fertilizer: false,
             content: 'journal_content1'
@@ -130,8 +133,9 @@ The Hawaii case was experiencing mild to moderate symptoms and was isolated at h
         {
             journalId: 3,
             title: 'journal_title',
+            name: 'fff',
             author: 0,
-            created_at: new Date(),
+            created_at: new Date().toISOString().split('T')[0],
             water: true,
             fertilizer: false,
             content: 'journal_content1'
@@ -140,8 +144,9 @@ The Hawaii case was experiencing mild to moderate symptoms and was isolated at h
         {
             journalId: 4,
             title: 'journal_title',
+            name: 'fff',
             author: 0,
-            created_at: new Date(),
+            created_at: new Date().toISOString().split('T')[0],
             water: true,
             fertilizer: false,
             content: 'journal_content1'
@@ -150,8 +155,9 @@ The Hawaii case was experiencing mild to moderate symptoms and was isolated at h
         {
             journalId: 5,
             title: 'journal_title',
+            name: 'fff',
             author: 0,
-            created_at: new Date(),
+            created_at: new Date().toISOString().split('T')[0],
             water: true,
             fertilizer: false,
             content: 'journal_content1'
@@ -160,8 +166,9 @@ The Hawaii case was experiencing mild to moderate symptoms and was isolated at h
         {
             journalId: 6,
             title: 'journal_title',
+            name: 'fff',
             author: 0,
-            created_at: new Date(),
+            created_at: new Date().toISOString().split('T')[0],
             water: true,
             fertilizer: false,
             content: 'journal_content1'

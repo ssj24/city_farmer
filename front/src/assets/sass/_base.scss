@@ -71,6 +71,10 @@ $bp-smallest: 31.25em; // 500px
   border: 1px solid $color;
 }
 
+@keyframes pulse {
+  100% { color: darken($color-point-1, 30%); box-shadow: 0 0 0 0 $color-point-1; }
+  }
+
 * {
     margin: 0;
     padding: 0;
@@ -201,6 +205,7 @@ select {
     height: 90%;
     background-color: white;
     overflow: auto;
+    position: relative;
     .title {
       
     }
@@ -208,18 +213,25 @@ select {
       padding: 20px;
     }
     .footer {
-      
-      .download {
-        
-      }
+      width: 100%;
       .close {
-        
+        position: relative;
+        bottom: 0;
+        left: 45%;
+        font-family: 'BMEuljiro10yearslater';
+        width: 70px;
+        margin: 10px;
+        border-radius: 5px;
+        padding: 10px;
+        border: 1px solid black;
+        &:hover, 
+        &:focus {
+          border-color: $color-alert;
+          animation: pulse 1s;
+          box-shadow: 0 0 0 1em rgba(#fff,0);
       }
     }
   }
 }
-
-@keyframes pulse {
-  100% { box-shadow: 0 0 0 0 $color-point-1; }
-  }
+}
 
