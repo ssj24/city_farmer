@@ -42,7 +42,7 @@ router.get('/', function(req, res, next) {
 });
 router.get('/user', function(req, res, next) {
     const Id = req.cookies.userId;
-    connection.query('SELECT journalId, title, date_format(created_at, "%Y-%m-%d") as created_at, water, fertilizer, content FROM journals WHERE author = '+Id+';', function (err, row) {
+    connection.query('SELECT journalId, title, date_format(created_at, "%Y-%m-%d") as created_at, water, fertilizer, content FROM journals WHERE author = '+Id+' order by created_at desc;', function (err, row) {
         if (err) {
           res.json({
             success: false,
