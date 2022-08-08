@@ -54,13 +54,11 @@ export default defineComponent({
     }
   },
   mounted() {
-    // if (this.crops[0]) {
-    //   // this.cntntsNo = this.crops.cntntsNo;
-    //   console.log(this.crops[0]);
   },
   methods: {
     openModal(evt: Event, id: number) {
       const modal = document.querySelector(".overlay") as HTMLDivElement;
+      console.log(this.crops);
       this.cntntsNo = id;
       console.log(this.cntntsNo);
       modal.classList.add('active');

@@ -23,7 +23,7 @@ npm install
 npm start
 ```
 
-
+http://localhost:3000/
 
 ## 활용 데이터 :computer:
 

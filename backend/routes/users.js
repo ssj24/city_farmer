@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
   const Id = req.cookies.userId;
   let water = '';
   let fertilizer = '';
-  connection.query(`select date_format(created_at, "%Y-%m-%d") as created_at from journals where author = ${Id} and water = 1 order by 1 DESC limit 0, 1;`, function(err, row) {
+  connection.query(`select date_format(created_at, "%Y-%m-%d") as created_at from journals where author = ${Id} and water = 0 order by 1 DESC limit 0, 1;`, function(err, row) {
     if (err) {
       console.log(err);
     } else if (row.length) {
@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
     } else if (!row.length) {
       water = '';
     }
-    connection.query(`select date_format(created_at, "%Y-%m-%d") as created_at from journals where author = ${Id} and fertilizer = 1 order by 1 DESC limit 0, 1;`, function(err2, row2) {
+    connection.query(`select date_format(created_at, "%Y-%m-%d") as created_at from journals where author = ${Id} and fertilizer = 0 order by 1 DESC limit 0, 1;`, function(err2, row2) {
       if (err2) {
         console.log(err2);
       } else if (row2.length) {
@@ -44,7 +44,7 @@ router.get('/', function(req, res, next) {
           water: water,
           fertilizer: fertilizer
         })
-      } else if (!row.length) {
+      } else if (!row2.length) {
         res.json({
           success: true,
           water: water,

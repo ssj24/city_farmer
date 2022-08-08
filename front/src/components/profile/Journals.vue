@@ -63,7 +63,6 @@ export default defineComponent({
     axios.
     get('/journals/user')
     .then(res => {
-      console.log('journals/user', res);
         this.journals = res.data.data;
     })
     .catch(err => console.log(err));

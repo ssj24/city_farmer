@@ -15,7 +15,11 @@
     }
     select {
         height: 40px;
-    }
+        text-align-last: center;
+        text-align: center;
+        -ms-text-align-last: center;
+        -moz-text-align-last: center;
+     }
     #searchCategory {
         width: 10%;
     }

@@ -19,7 +19,6 @@ connection.connect(function (err) {
     throw err;
   } 
 });
-
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     connection.query('SELECT journalId, title, date_format(created_at, "%Y-%m-%d") as created_at, water, fertilizer, content, userId, name FROM journals, users WHERE journals.author = users.userId ORDER BY journalId DESC LIMIT 0, 7', function (err, row) {

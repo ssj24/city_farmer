@@ -33,23 +33,25 @@ export default defineComponent({
     }
   },
   mounted() {
+    console.log('cropdetail mounted', this.cntntsNo);
     this.updateInfo();
   },
   methods: {
     updateInfo: function() {
+      console.log('cropdetail updateInfo', this.cntntsNo);
       document.querySelector('.cropBasic')!.insertAdjacentHTML( 'beforeend', this.basicInfo );
       document.querySelector('.cropSchedule')!.insertAdjacentHTML( 'beforeend', this.scheduleInfo );
-
     }
   },
   watch: {
-    cntntsNo: function(val) {
+    cntntsNo: function() {
       axios
         .get('/crops', {
           params: {
-            cntnts: val
+            cntnts: this.cntntsNo
           }})
         .then(response => {
+          console.log('hehe', response);
           this.cropName = response.data.basicInfo.cntntsSj._cdata;
           this.basicInfo = response.data.basicInfo.cn._cdata;
           this.scheduleInfo = response.data.schedule._cdata;
@@ -62,15 +64,6 @@ export default defineComponent({
   }
 });
 
-// basicInfo:
-// cn: {_cdata: '<h6>과원 개원 및 간벌</h6>\r\n<ul> \r\n<li>개원시 정식 재식거리 : 2.0×…<br /> 이후</td>\r\n</tr> \r\n</tbody> \r\n</table></div>'}
-// cntntsNo: {_cdata: '30654'}
-// cntntsSj: {_cdata: '감귤(보통 온주밀감)'}
-// kidofcomdtySeCode: {_cdata: '210002'}
-// kidofcomdtySeCodeNm: {_cdata: '과수'}
-
-// schedule:
-// _cdata: "<h2>생육과정(주요농작업)</h2><div class=\"m_scrollTable\">
 </script>
 
 <style>

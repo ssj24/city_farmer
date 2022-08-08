@@ -5,6 +5,7 @@ require('dotenv').config();
 const axios = require('axios');
 const request = require('request');
 const converter = require('xml-js');
+
 //추가한 부분
 var mysql = require('mysql');
 // Connection 객체 생성 
@@ -25,6 +26,7 @@ connection.connect(function (err) {
 });
 
 router.get('/', async function(req, res1, next) {
+    console.log('crops.js',req.query.cntnts);
     const cntntsNo = req.query.cntnts;
     const apiKey = process.env.VUE_APP_NONGSARO_KEY;
     const requestUrl = `http://api.nongsaro.go.kr/service/farmWorkingPlanNew/workScheduleDtl?cntntsNo=${cntntsNo}&apiKey=${apiKey}`;
@@ -38,24 +40,44 @@ router.get('/', async function(req, res1, next) {
         }
         else {
             if(res2.statusCode == 200){
-                let scheduleGrpList = converter.xml2js(body, {compact: true, spaces: 2});
-                // let contents = scheduleGrpList.response.body.items.item;
-                let contents = await scheduleGrpList.response.body.item;
-                data.basicInfo = contents;
+                body = `<html>
+                <head>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <WISPAccessGatewayParam xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.acmewisp.com/WISPAccessGatewayParam.xsd"> 
+                    <Redirect>       
+                        <AccessProcedure>1.0</AccessProcedure>           
+                        <AccessLocation>QookNShow</AccessLocation>                
+                        <LocationName>QookNShow</LocationName>   
+                        <LoginURL>https://first.wifi.olleh.com/webauth/wispr/login.php?ip=221.158.214.30&mac=f8ffc2051301</LoginURL>               
+                        <MessageType>100</MessageType>            
+                        <ResponseCode>0</ResponseCode>  
+                    </Redirect>
+                </WISPAccessGatewayParam> 
+                        <script>
+                         location.href = "http://first.wifi.olleh.com/webauth/redirection.php?ip=221.158.214.30&mac=f8ffc2051301&url=&ssid=KT_starbucks&ap_mac=00300dd0d0df&apmodel=MW-6900AP";
+                        </script>
+                </head>
+                </html>`;
+                console.log(body.script);
+                // let scheduleGrpList = converter.xml2js(body, {compact: true, spaces: 2});
+                // // let contents = scheduleGrpList.response.body.items.item;
+                // let contents = await scheduleGrpList.response.body.item;
+                // console.log(contents);
+                // data.basicInfo = contents;
 
-                request.get(requestUrlSchedule, async (err,res3,body) =>{
-                    if(err){
-                        console.log(`err => ${err}`)
-                    }
-                    else {
-                        if(res3.statusCode == 200){
-                            let scheduleGrpList = converter.xml2js(body, {compact: true, spaces: 2});
-                            let contents = await scheduleGrpList.response.body.items.item.htmlCn;
-                            data.schedule = contents;
-                            res1.status(200).send(data);
-                        }
-                    }
-                })
+                // request.get(requestUrlSchedule, async (err,res3,body) =>{
+                //     if(err){
+                //         console.log(`err => ${err}`)
+                //     }
+                //     else {
+                //         if(res3.statusCode == 200){
+                //             let scheduleGrpList = converter.xml2js(body, {compact: true, spaces: 2});
+                //             let contents = await scheduleGrpList.response.body.items.item.htmlCn;
+                //             data.schedule = contents;
+                //             res1.status(200).send(data);
+                //         }
+                //     }
+                // })
             }
         }
     })
