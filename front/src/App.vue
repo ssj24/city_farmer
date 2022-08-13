@@ -5,12 +5,13 @@
     </h1>
     <div id="nav">
       <router-link to="/">홈</router-link> |
-      <span v-if="userId">
+      <!-- <span v-if="userId"> -->
         <router-link to="/profile">프로필</router-link> |
         <router-link to="/write">일기쓰기</router-link> | 
-      </span>
-      <a v-if="userId" @click="logout">로그아웃</a>
-      <router-link to="/login" v-else>로그인</router-link>
+      <!-- </span> -->
+      <!-- <a v-if="userId" @click="logout">로그아웃</a> -->
+      <!-- <router-link to="/login" v-else>로그인</router-link> -->
+      <router-link to="/login">로그인</router-link>
     </div>
   </header>
   <router-view/>

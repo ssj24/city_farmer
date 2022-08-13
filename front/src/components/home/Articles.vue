@@ -175,12 +175,12 @@ The Hawaii case was experiencing mild to moderate symptoms and was isolated at h
 
         },
     ]
-    axios.
-        get('/journals')
-        .then(res => {
-            this.journals = res.data.data;
-        })
-        .catch(err => console.log(err))
+    // axios.
+    //     get('/journals')
+    //     .then(res => {
+    //         this.journals = res.data.data;
+    //     })
+    //     .catch(err => console.log(err))
   },
   methods: {
     toggleActive(event: Event, id: number) {

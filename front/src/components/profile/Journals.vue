@@ -58,14 +58,14 @@ export default defineComponent({
     //       journalContainer.classList.toggle('seek');
     //   }
   },
-  mounted() {
+  // mounted() {
 
-    axios.
-    get('/journals/user')
-    .then(res => {
-        this.journals = res.data.data;
-    })
-    .catch(err => console.log(err));
-  }
+  //   axios.
+  //   get('/journals/user')
+  //   .then(res => {
+  //       this.journals = res.data.data;
+  //   })
+  //   .catch(err => console.log(err));
+  // }
 });
 </script>

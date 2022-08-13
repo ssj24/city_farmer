@@ -17,7 +17,7 @@ export default defineComponent({
   name: 'CropDetail',
   props: {
     cntntsNo: {
-      type: String
+      type: Number
     }
   },
   data() {
@@ -43,25 +43,25 @@ export default defineComponent({
       document.querySelector('.cropSchedule')!.insertAdjacentHTML( 'beforeend', this.scheduleInfo );
     }
   },
-  watch: {
-    cntntsNo: function() {
-      axios
-        .get('/crops', {
-          params: {
-            cntnts: this.cntntsNo
-          }})
-        .then(response => {
-          console.log('hehe', response);
-          this.cropName = response.data.basicInfo.cntntsSj._cdata;
-          this.basicInfo = response.data.basicInfo.cn._cdata;
-          this.scheduleInfo = response.data.schedule._cdata;
-          this.updateInfo();
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }
-  }
+  // watch: {
+  //   cntntsNo: function() {
+  //     axios
+  //       .get('/crops', {
+  //         params: {
+  //           cntnts: this.cntntsNo
+  //         }})
+  //       .then(response => {
+  //         console.log('hehe', response);
+  //         this.cropName = response.data.basicInfo.cntntsSj._cdata;
+  //         this.basicInfo = response.data.basicInfo.cn._cdata;
+  //         this.scheduleInfo = response.data.schedule._cdata;
+  //         this.updateInfo();
+  //       })
+  //       .catch(error => {
+  //         console.log(error)
+  //       })
+  //   }
+  // }
 });
 
 </script>

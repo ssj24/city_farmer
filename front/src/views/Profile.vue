@@ -42,27 +42,27 @@ export default defineComponent({
       {
           cropId: 1,
           codeNm: '콩',
-          img: '@/assets/flower.png',
+          image: require('@/assets/flower.png'),
       },
       {
           cropId: 2,
           codeNm: '옥수수',
-          img: require('@/assets/flower.png'),
+          image: require('@/assets/flower.png'),
       },
       {
           cropId: 3,
           codeNm: '감자',
-          img: require('@/assets/flower.png'),
+          image: require('@/assets/flower.png'),
       },
       {
           cropId: 4,
           codeNm: '벼',
-          img: require('@/assets/flower.png'),
+          image: require('@/assets/flower.png'),
       },
       {
           cropId: 5,
           codeNm: '수수',
-          img: require('@/assets/flower.png'),
+          image: require('@/assets/flower.png'),
       },
     ];
     let notis = [
@@ -102,33 +102,33 @@ export default defineComponent({
   setup() {
   },
 
-  mounted() {
-    axios.
-    get('/users/crops')
-    .then(res => {
-      this.crops = res.data.data;
-    })
-    .catch(err => console.log(err));
+  // mounted() {
+  //   axios.
+  //   get('/users/crops')
+  //   .then(res => {
+  //     this.crops = res.data.data;
+  //   })
+  //   .catch(err => console.log(err));
 
-    axios.
-    get('/crops/diseases')
-    .then(res => {
-      this.notis = res.data.data;
-    })
-    .catch(err => console.log(err));
+  //   axios.
+  //   get('/crops/diseases')
+  //   .then(res => {
+  //     this.notis = res.data.data;
+  //   })
+  //   .catch(err => console.log(err));
 
-    this.user = {
-      id: getCookie('userId'),
-      name: getCookie('userName')
-    }
-    axios.
-    get('/users')
-    .then(res => {
-      this.water = res.data.fertilizer[0].created_at;
-      this.med = res.data.water[0].created_at;
-    })
-    .catch(err => console.log(err))
-  },
+  //   this.user = {
+  //     id: getCookie('userId'),
+  //     name: getCookie('userName')
+  //   }
+  //   axios.
+  //   get('/users')
+  //   .then(res => {
+  //     this.water = res.data.fertilizer[0].created_at;
+  //     this.med = res.data.water[0].created_at;
+  //   })
+  //   .catch(err => console.log(err))
+  // },
   methods: {
     getClass(midCategory: string) {
       if (midCategory === '병') return 'warning';

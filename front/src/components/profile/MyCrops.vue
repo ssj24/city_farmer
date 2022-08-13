@@ -23,22 +23,22 @@ export default defineComponent({
   props: {
     // crops: Object,
   },
-  mounted () {
-    axios
-      .get('/users')
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  },
+  // mounted () {
+  //   axios
+  //     .get('/users')
+  //     .then(response => {
+  //       console.log(response);
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+  // },
   setup() {
       const crops: Object[] = [
           {
               id: 1,
               name: '콩',
-              img: require('@/assets/flower.png'),
+              img: '../../assets/flower.png',
           },
           {
               id: 2,
